@@ -62,6 +62,7 @@
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\LightController.cs" />
     <Compile Include="Assets\Scripts\MainCharacter.cs" />
+    <Compile Include="Assets\Scripts\MindTracking.cs" />
     <Compile Include="Assets\Scripts\NeuroSky\DisplayData.cs" />
     <Compile Include="Assets\Scripts\NeuroSky\PreserveGameObject.cs" />
     <Compile Include="Assets\Scripts\NeuroSky\TGCConnectionController.cs" />

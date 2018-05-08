@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
 
     public bool gameOver = true;
+    public MindTracking myTracker;
     Vector3 startPos = new Vector3(0, 1.36f, -7.61f);
     // Use this for initialization
 	void Start () {
@@ -21,7 +22,7 @@ public class CameraController : MonoBehaviour {
             }
 
         } else {
-            transform.Translate(Vector3.forward * Time.deltaTime * 3, Space.World);
+            transform.Translate(Vector3.forward * Time.deltaTime * myTracker.speed, Space.World);
         }
 
 	}
@@ -30,4 +31,5 @@ public class CameraController : MonoBehaviour {
         gameOver = true;
         transform.position = startPos;
     }
+
 }

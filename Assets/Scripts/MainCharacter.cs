@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainCharacter : MonoBehaviour {
 
@@ -26,11 +27,19 @@ public class MainCharacter : MonoBehaviour {
 
     public int points = 0;
 
-    TGCConnectionController controller;
-    private int attention;
-
     public CameraController myCamera;
+    public MindTracking myTracker;
     float distance;
+
+    public AudioClip coinDing;
+    public AudioSource myAudio;
+
+    public bool won = false;
+
+    public Text displayScore;
+
+    float monsterLane = 0.0f;
+    float coinLane = 0.0f;
 
 
     void Start () {
@@ -43,52 +52,81 @@ public class MainCharacter : MonoBehaviour {
         positions.Add(0.6f);
 
         animator = GetComponent < Animator >();
-        float distance = 0.0f;
+        distance = 0.0f;
+        myAudio = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        controller = GameObject.Find("NeuroSkyTGCController").GetComponent<TGCConnectionController>();
-        controller.UpdateAttentionEvent += OnUpdateAttention;
+        
+        if (won) {
+            displayScore.text = "Points: " + points;
+            gameOver = true;
+            myCamera.gameOver = true;
+            animator.SetTrigger(stopHash);
+            transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
 
-        if (gameOver) {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                RestartGame();
+            }
+        } else if (gameOver) {
+            displayScore.text = " ";
+
             foreach (GameObject monsterClone in monsters) {
                 Destroy(monsterClone);
             }
+            foreach (GameObject coinClone in coins) {
+                Destroy(coinClone);
+            }
             monsters = new HashSet<GameObject>();
+            coins = new List<GameObject>();
+
             if (Input.GetKeyDown(KeyCode.Space)){
                 gameOver = false;
                 animator.SetTrigger(startHash);
             }
         } else {
-            transform.Translate(Vector3.forward * Time.deltaTime * 3);
-            yGoal = attention / 50;
-            Vector3 d = new Vector3(goal - transform.position.x, yGoal-transform.position.y, 0.0f);
+            transform.Translate(Vector3.forward * Time.deltaTime * myTracker.speed);
+
+            Vector3 d = new Vector3(goal - transform.position.x, myTracker.floating-transform.position.y, 0.0f);
             float step = Time.deltaTime * 3;
             distance += step;
 
-            if (distance >= 3.0f) {
-                float rand = Random.value;
+            if (distance >= 2.0f) {
 
+                if (transform.position.z <= 290)
+                {
 
-                if (rand <= ((attention/100)+0.5)) {
-                    
-                    GameObject monster = monsterTypes[(int)Random.Range(0, 2.9f)];
-                    Vector3 monsterPos = new Vector3(positions[(int)Random.Range(0, 2.9f)], 0, transform.position.z + 20);
-                    GameObject monsterClone = Instantiate(monster, monsterPos, Quaternion.Euler(0, 180, 0));
-                    monsters.Add(monsterClone);
+                    if (myTracker.spawnMonster)
+                    {
+                        monsterLane = positions[(int)Random.Range(0, 2.9f)];
+                        GameObject monster = monsterTypes[(int)Random.Range(0, 2.9f)];
+                        Vector3 monsterPos = new Vector3(monsterLane, 0, transform.position.z + 20);
+                        GameObject monsterClone = Instantiate(monster, monsterPos, Quaternion.Euler(0, 180, 0));
+                        monsters.Add(monsterClone);
 
-                } else if (rand > ((attention/100)+0.5)) {
-                    
-                    Vector3 coinPos = new Vector3(positions[(int)Random.Range(0, 2.9f)], 0.4f, transform.position.z + 20);
-                    GameObject thisCoin = Instantiate(coin, coinPos, Quaternion.Euler(0, 180, 0));
-                    coins.Add(thisCoin);
+                    }
+                    if (myTracker.spawnCoin)
+                    {
+                        coinLane = positions[(int)Random.Range(0, 2.9f)];
+                        if (coinLane != monsterLane) {
+                            Vector3 coinPos = new Vector3(coinLane, 0.4f, transform.position.z + 20);
+                            GameObject thisCoin = Instantiate(coin, coinPos, Quaternion.Euler(0, 180, 0));
+                            coins.Add(thisCoin);
 
+                        }
+
+                    }
                 }
                 distance = 0.0f;
             }
 
             transform.position = Vector3.MoveTowards(transform.position, transform.position + d, step);
+
+            if (transform.position.z >= 310) {
+                won = true;
+            }
 
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -114,26 +152,33 @@ public class MainCharacter : MonoBehaviour {
 
 
 	}
-    void OnUpdateAttention(int value)
-    {
-        attention = value;
-    }
+
 
     void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == "Monster")
         {
-            gameOver = true;
-            animator.SetTrigger(stopHash);
-            transform.position = startPos;
-            myCamera.endGame();
-            points = 0;
+
+            RestartGame();
         }
 
         if (col.gameObject.tag == "Coin")
         {
-            points += 1;
+            myAudio.PlayOneShot(coinDing);
+            points += myTracker.coinPoints;
 
         }
+
     }
+
+    void RestartGame()
+    {
+        points = 0;
+        gameOver = true;
+        won = false;
+        animator.SetTrigger(stopHash);
+        transform.position = startPos;
+        myCamera.endGame();
+    }
+
 }

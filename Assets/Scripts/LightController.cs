@@ -5,9 +5,7 @@ using UnityEngine;
 public class LightController : MonoBehaviour {
 
     public Light lt;
-
-    TGCConnectionController controller;
-    private int meditation;
+    public MindTracking myTracker;
 
     void Start () {
         lt = GetComponent<Light>();
@@ -15,14 +13,7 @@ public class LightController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        controller = GameObject.Find("NeuroSkyTGCController").GetComponent<TGCConnectionController>();
-        controller.UpdateMeditationEvent += OnUpdateMeditation;
-        //change this as 
-        //lt.intensity = meditation / 50;
-        //lt.color = Color.Lerp(Color.black, Color.white, meditation / 100);
+        lt.intensity = myTracker.lightNum;
+        lt.color = Color.Lerp(Color.black, Color.white, myTracker.lightNum);
 	}
-    void OnUpdateMeditation(int value)
-    {
-        meditation = value;
-    }
 }
