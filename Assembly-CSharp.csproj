@@ -10,7 +10,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
-    <ProjectGuid>{493A42B7-387F-7CFF-C1F9-9784C3194494}</ProjectGuid>
+    <ProjectGuid>{30164D56-8A7E-74F3-0536-75008C571D74}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -71,10 +71,10 @@
     <Compile Include="Assets\Troll_Сannibal\Script\TrolControl.cs" />
     <None Include="Assets\Troll_Сannibal\readme.txt" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>/Users/marinacottrell/Monster Mash/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>/Users/dcottrell/Documents/Monster-Mash/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>/Users/marinacottrell/Monster Mash/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>/Users/dcottrell/Documents/Monster-Mash/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -272,19 +272,19 @@
       <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Jayrock">
-      <HintPath>/Users/marinacottrell/Monster Mash/Assets/Scripts/NeuroSky/Jayrock.dll</HintPath>
+      <HintPath>/Users/dcottrell/Documents/Monster-Mash/Assets/Scripts/NeuroSky/Jayrock.dll</HintPath>
     </Reference>
     <Reference Include="Jayrock.Json">
-      <HintPath>/Users/marinacottrell/Monster Mash/Assets/Scripts/NeuroSky/Jayrock.Json.dll</HintPath>
+      <HintPath>/Users/dcottrell/Documents/Monster-Mash/Assets/Scripts/NeuroSky/Jayrock.Json.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
-      <HintPath>/Users/marinacottrell/Library/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
+      <HintPath>/Users/dcottrell/Library/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Purchasing">
-      <HintPath>/Users/marinacottrell/Library/Unity/cache/packages/packages.unity.com/com.unity.purchasing@2.0.1/UnityEngine.Purchasing.dll</HintPath>
+      <HintPath>/Users/dcottrell/Library/Unity/cache/packages/packages.unity.com/com.unity.purchasing@2.0.1/UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
-      <HintPath>/Users/marinacottrell/Library/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
+      <HintPath>/Users/dcottrell/Library/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>/Applications/Unity/Unity.app/Contents/MonoBleedingEdge/lib/mono/unity/mscorlib.dll</HintPath>
